@@ -195,6 +195,40 @@ local k = resetX(function()
 end)
 print("result10", k(5)) -- 16
 
+local result = resetX(function()
+  return 1 + resetY(function()
+    return 2 + withSubCont(tagX, function(k)
+      -- k: 1 + resetY(function() return 2 + _ end)
+      return pushSubCont(k, function()
+        return withSubCont(tagY, function(l)
+          -- l: 2 + _
+          return 3 * pushSubCont(l, function()
+            return 5
+          end)
+        end)
+      end)
+    end)
+  end)
+end)
+print("result11", result) -- 1 + 3 * (2 + 5) = 22
+
+local result = resetY(function()
+  return 7 * resetX(function()
+    return 2 + withSubCont(tagX, function(k)
+      -- k: 2 + _
+      return pushSubCont(k, function()
+        return withSubCont(tagY, function(l)
+          -- l: 7 * (2 + _)
+          return 3 + pushSubCont(l, function()
+            return 5
+          end)
+        end)
+      end)
+    end)
+  end)
+end)
+print("result12", result) -- 3 + (7 * (2 + 5)) = 52
+
 --[[
 C stack overflow:
 local function recur(n)
