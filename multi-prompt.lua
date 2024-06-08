@@ -1,3 +1,6 @@
+-- Copyright (c) 2022,2024 ARATA Mizuki
+-- Distributed under MIT License (see LICENSE)
+
 function newPromptTag()
   return {}
 end

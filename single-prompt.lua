@@ -1,3 +1,6 @@
+-- Copyright (c) 2022,2024 ARATA Mizuki
+-- Distributed under MIT License (see LICENSE)
+
 local sk_meta = {}
 local function run(c, ...)
   local status, a, b = coroutine.resume(c, ...)
